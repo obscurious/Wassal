@@ -1,6 +1,6 @@
 require_relative 'spec_helper'
 
-describe Model1 do
+describe Account do
   it "should " do
     # ...
   end
