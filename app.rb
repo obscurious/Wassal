@@ -8,7 +8,7 @@ class Wassal < Roda
   opts[:verbatim_string_matcher] = true
 
   plugin :default_headers,
-    'Content-Type'=>'text/html',
+    'Content-Type'=>'application/json',
     'Content-Security-Policy'=>"default-src 'self' https://oss.maxcdn.com/ https://maxcdn.bootstrapcdn.com https://ajax.googleapis.com",
     #'Strict-Transport-Security'=>'max-age=16070400;', # Uncomment if only allowing https:// access
     'X-Frame-Options'=>'deny',
@@ -21,8 +21,8 @@ class Wassal < Roda
     :secret=>File.read('.session_secret')
 
   plugin :csrf
-  plugin :render, :escape=>:erubi
   plugin :multi_route
+  plugin :json, :classes=>[Array, Hash, Sequel::Model]
 
   Unreloader.require('routes'){}
 
@@ -30,7 +30,6 @@ class Wassal < Roda
     r.multi_route
 
     r.root do
-      view 'index'
     end
   end
 end
