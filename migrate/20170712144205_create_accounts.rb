@@ -1,8 +1,8 @@
 Sequel.migration do
   change do
-    create_table(:account) do
+    create_table :accounts do
       primary_key :id
-      text        :name, unique: true
+      column :name, String, unique: true
     end
   end
 end
